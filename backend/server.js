@@ -1,11 +1,13 @@
 require('dotenv').config()
 const express = require('express')
-
+const connectDB = require('./database');
 // app
 const app = express()
 
 const getRoutes = require('./routes/get');
 
+
+connectDB();
 
 
 // middleware

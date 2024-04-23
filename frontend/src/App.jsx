@@ -1,33 +1,21 @@
-import viteLogo from '/vite.svg'
-import './App.css'
-import axios from 'axios'
-import { useEffect, useState } from 'react'
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Home from './components/home';
+import Signin from './components/signin';
+import Signup from './components/signup';
 
-function App() {
-  const [jokes, setJokes] = useState([])
+const App = () => {
+    return (
+        <Router>
+            <div>
+                <Routes>
+                    <Route path="/" exact element={<Home />} />
+                    <Route path="/signin" element={<Signin />} />
+                    <Route path="/signup" element={<Signup />} />
+                </Routes>
+            </div>
+        </Router>
+    );
+};
 
-  useEffect(()=>{
-    axios.get('/api/jokes')
-    .then((response)=>{
-      setJokes(response.data)
-    }).catch((error)=>{
-      console.log(error)
-    }
-    )
-  })
-  return (
-    <>
-      <h1>Connect and Learn junaid</h1>
-      <p>name{jokes.length}</p>
-      {
-        jokes.map((joke,index) => (
-          <div key={joke.id}>
-            <h3>{joke.name}</h3>
-          </div>
-        ))
-      }
-    </>
-  )
-}
-
-export default App
+export default App;

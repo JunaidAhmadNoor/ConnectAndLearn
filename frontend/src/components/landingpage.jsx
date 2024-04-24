@@ -45,7 +45,7 @@ const LandingPage = () => {
                         src="2divimage.jpeg"
                         alt="Description"
                         // style={{ marginLeft: '30rem' }}
-                        className="w-96 h-58 ml-44"
+                        className="w-96 ml-44"
                     />
                 </div>
             </div>
@@ -60,7 +60,7 @@ const LandingPage = () => {
                         src="3divimage.jpeg"
                         alt="Description"
                         // style={{ marginLeft: '30rem' }}
-                        className="w-96 h-58 ml-20"
+                        className="w-96 ml-20"
                     />
                 </div>
 
@@ -95,7 +95,7 @@ const LandingPage = () => {
                         src="4divimage.jpeg"
                         alt="Description"
                         // style={{ marginLeft: '30rem' }}
-                        className="w-96 h-58 ml-44"
+                        className="w-96 ml-44"
                     />
                 </div>
             </div>
@@ -109,7 +109,7 @@ const LandingPage = () => {
                         src="5divimage.jpeg"
                         alt="Description"
                         // style={{ marginLeft: '30rem' }}
-                        className="w-96 h-58 ml-20"
+                        className="w-96 ml-20"
                     />
                 </div>
 
@@ -144,7 +144,7 @@ const LandingPage = () => {
                         src="6divimage.jpeg"
                         alt="Description"
                         // style={{ marginLeft: '30rem' }}
-                        className="w-96 h-58 ml-44"
+                        className="w-96 ml-44"
                     />
                 </div>
             </div>

@@ -1,35 +1,32 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React from 'react';
+import axios from 'axios';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Toaster } from 'react-hot-toast';
+import LandingPage from './pages/landingpage';
+import Signin from './pages/signin';
+import Signup from './pages/signup';
+import GroupStudy from './pages/groupStudy';
+import UserContextProvider from '../context/userContext';
 
-function App() {
-  const [count, setCount] = useState(0)
+axios.defaults.baseURL = 'http://localhost:4000';
+axios.defaults.withCredentials = true;
 
-  return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+const App = () => {
+    return (
+        <>
+            <UserContextProvider>
+                <Toaster position='top-right' toastOptions={{ duration: 2000 }} />
 
-export default App
+                <Routes>
+                    <Route path="/" element={<LandingPage />} />
+                    <Route path="/signin" element={<Signin />} />
+                    <Route path="/signup" element={<Signup />} />
+                    <Route path="/groupStudy" element={<GroupStudy />} />
+                </Routes>
+
+            </UserContextProvider>
+        </>
+    );
+};
+
+export default App;

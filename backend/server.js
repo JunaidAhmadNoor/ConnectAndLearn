@@ -1,23 +1,29 @@
-require('dotenv').config()
-const express = require('express')
+import dotenv from 'dotenv';
+import express from 'express';
+import mongoose from 'mongoose';
+import cookieParser from 'cookie-parser';
+import authRoutes from '../backend/routes/authRoutes.js'
+// Load environment variables from .env file
+dotenv.config();
 
-// app
-const app = express()
 
-const getRoutes = require('./routes/get');
+// Create Express app
+const app = express();
 
+mongoose.connect(process.env.mongo)
+.then(() => console.log("Database connected"))
+.catch((err) => console.log("Database not connected", err))
 
-
-// middleware
-app.use((req, res, next) => {
-    console.log(req.path, req.method)
-    next()
-})
+//middleware
+app.use(express.json())
+app.use(cookieParser())
+app.use(express.urlencoded({extended: false}))
 
 // Routes
-app.use('/', getRoutes);
+app.use('/', authRoutes);
 
-// listen 
-app.listen(process.env.PORT, () => {
-    console.log('Port is ', process.env.PORT)
-})
+// Listen on the specified port
+const PORT = process.env.PORT;
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+});

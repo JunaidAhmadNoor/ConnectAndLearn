@@ -1,29 +1,26 @@
 import dotenv from 'dotenv';
 import express from 'express';
-import connectDB from './database.js';  
-import getRoutes from './routes/get.js'; 
-import jokeRoutes from './routes/jokes.js'; 
-import arrRoutes from './routes/arr.js'; 
-
+import mongoose from 'mongoose';
+import cookieParser from 'cookie-parser';
+import authRoutes from '../backend/routes/authRoutes.js'
 // Load environment variables from .env file
 dotenv.config();
 
-// Connect to the database
-connectDB();
 
 // Create Express app
 const app = express();
 
-// Middleware
-app.use((req, res, next) => {
-    console.log(req.path, req.method);
-    next();
-});
+mongoose.connect(process.env.mongo)
+.then(() => console.log("Database connected"))
+.catch((err) => console.log("Database not connected", err))
+
+//middleware
+app.use(express.json())
+app.use(cookieParser())
+app.use(express.urlencoded({extended: false}))
 
 // Routes
-app.use('/', getRoutes);
-app.use('/api/jokes', jokeRoutes);
-app.use('/arr', arrRoutes);
+app.use('/', authRoutes);
 
 // Listen on the specified port
 const PORT = process.env.PORT;

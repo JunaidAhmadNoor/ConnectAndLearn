@@ -1,18 +1,24 @@
-import { Component, useEffect } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import {React, useEffect} from 'react';
+import Cookies from "js-cookie";
+import { useNavigate } from 'react-router-dom';
 
-export default function Protected(props){
-    const {Component} = props;
+const Protected = ({ elementBody:Component}) => {
     const Navigate = useNavigate();
-    useEffect(()=>{
-        let login = localStorage.getItem('signin');
-        if(!login){
-            Navigate('/signin')
+    const isLoggedIn = Cookies.get("token")
+    console.log("I hit here");
+
+    useEffect(() => {
+        if (!isLoggedIn) {
+            Navigate('/signin');
         }
-    });
-    return(
-        <div>
-            <Component/>
-        </div>
-    )
-}
+    }, [isLoggedIn, Navigate]);
+
+    return (<>
+    {
+        isLoggedIn?Component:<Navigate to="/signin"/>
+    }
+    </>)
+};
+
+export default Protected;
+

@@ -8,7 +8,7 @@ const UserContextProvider = ({ children }) => {
 
     useEffect(() => {
         if (!user) {
-            axios.get('/profile').then(({ data }) => {
+            axios.get('/profile',{ withCredentials: true }).then(({ data }) => {
                 setUser(data);
             }).catch(error => {
                 console.error('Error fetching user profile:', error);

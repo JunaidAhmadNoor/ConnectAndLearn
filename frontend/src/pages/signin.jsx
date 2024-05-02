@@ -6,9 +6,12 @@ import {toast} from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 
 
-const Home = () => {
+const Signin  = () => {
 
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    
+
+
     const [formData, setFormData] = useState({
         email: '',
         password: '',
@@ -46,6 +49,7 @@ const Home = () => {
                 email,
                 password
             });
+            console.log(response);
             if(response.data.error){
                 toast.error(response.data.error)
             }else{
@@ -99,7 +103,7 @@ const Home = () => {
                             </div>
 
                             <button
-                            type='submit'
+                            type='submit' 
                                 className="mt-4 px-6 py-2 rounded-lg bg-gray-300 text-black hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-opacity-50"
                             >
                                 Sign In
@@ -116,4 +120,4 @@ const Home = () => {
     );
 };
 
-export default Home;
+export default Signin ;

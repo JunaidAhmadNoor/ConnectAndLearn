@@ -5,7 +5,7 @@ import { Toaster } from 'react-hot-toast';
 import LandingPage from './pages/landingpage';
 import Signin from './pages/signin';
 import Signup from './pages/signup';
-import groupStudy from './pages/groupStudy';
+import GroupStudy from './pages/groupStudy';
 import UserContextProvider from '../context/userContext';
 import Protected from './components/protected';
 
@@ -22,7 +22,8 @@ const App = () => {
                     <Route path="/" element={<LandingPage />} />
                     <Route path="/signin" element={<Signin />} />
                     <Route path="/signup" element={<Signup />} />
-                    <Route path="/groupStudy" element={<Protected Component = {groupStudy}/>} />
+                    {/* <Route path="/groupStudy" element={<GroupStudy/>} /> */}
+                    <Route path="/groupStudy" element={<Protected elementBody={<GroupStudy/>}/>} />
                 </Routes>
 
             </UserContextProvider>

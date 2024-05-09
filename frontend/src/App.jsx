@@ -5,8 +5,9 @@ import { Toaster } from 'react-hot-toast';
 import LandingPage from './pages/landingpage';
 import Signin from './pages/signin';
 import Signup from './pages/signup';
-import GroupStudy from './pages/groupStudy';
+import Groups from './pages/Groups';
 import UserContextProvider from '../context/userContext';
+import GroupStudy from './pages/GroupStudy';
 import Protected from './components/protected';
 
 axios.defaults.baseURL = 'http://localhost:4000';
@@ -24,6 +25,7 @@ const App = () => {
                     <Route path="/signup" element={<Signup />} />
                     {/* <Route path="/groupStudy" element={<GroupStudy/>} /> */}
                     <Route path="/groupStudy" element={<Protected elementBody={<GroupStudy/>}/>} />
+                    <Route path="/groups" element={<Protected elementBody={<Groups/>}/>} />
                 </Routes>
 
             </UserContextProvider>

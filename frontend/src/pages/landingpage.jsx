@@ -10,16 +10,16 @@ const LandingPage = () => {
             <Nav /> {/* Include the Nav component */}
             <div className="mt-14 relative h-screen bg-cover bg-center flex items-start justify-center">
                 {/* <!-- Background Image --> */}
-                <img src="/landingPageFirstImage.jpeg" alt="Background Image" className="absolute inset-0 w-full h-full object-cover" />
+                <img src="/1.jpg" alt="Background Image" className="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 opacity-85" />
 
                 {/* <!-- Content --> */}
-                <div className="absolute top-0 text-white w-96 left-32">
-                    <p className="text-2xl md:text-4xl mt-32">
+                <div className="absolute top-0 text-white w-96 left-32 bg-clip-text ">
+                    <p className="text-2xl md:text-4xl mt-32 font-bold text-transparent bg-clip-text  shadow-white bg-gradient-to-r from-gray-700 to-gray-900">
                         Empowering Minds, Connecting Skills, Fostering Collaboration -
                         Where Knowledge Meets Innovation
                     </p>
                     <button className='mt-8'>
-                        <Link to="/signup" className="mt-8 px-6 py-2 bg-slate-600 text-white rounded hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
+                        <Link to="/signup" className="mt-8 px-6 py-2 bg-gray-800 text-white rounded hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
                             Sign Up
                         </Link>
                     </button>

@@ -1,10 +1,13 @@
+// Update the import statement to include Link
 import React, { useState } from 'react';
-import Nav from '../components/nav';
+import { ArrowRight } from 'lucide-react';
 import axios from 'axios';
-import {toast} from 'react-hot-toast';
-import { useNavigate } from 'react-router-dom';
-const SignIn = () => {
-    const navigate = useNavigate()
+import { toast } from 'react-hot-toast';
+import { Link, useNavigate } from 'react-router-dom'; // Import Link
+import Nav from '../components/nav';
+
+const SignUp = () => {
+    const navigate = useNavigate();
     const [formData, setFormData] = useState({
         firstName: '',
         lastName: '',
@@ -27,159 +30,204 @@ const SignIn = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const {firstName, lastName, role, email, password, confirmPassword } = formData
-       
-        // Validation 
+        const { firstName, lastName, role, email, password, confirmPassword } = formData;
+
+        // Validation
         const errors = {};
         if (!formData.firstName.trim()) errors.firstName = 'First name is required';
         if (!formData.lastName.trim()) errors.lastName = 'Last name is required';
-        // if (!formData.email.trim()) errors.email = 'Email is required';
+        if (!formData.email.trim()) errors.email = 'Email is required';
         if (!formData.password.trim()) errors.password = 'Password is required';
         if (formData.password !== formData.confirmPassword) errors.confirmPassword = 'Passwords do not match';
 
         if (Object.keys(errors).length === 0) {
-            // Handle form submission
-            console.log('Form submitted:', formData);
+            try {
+                // Make axios POST request
+                const response = await axios.post('/register', {
+                    firstName,
+                    lastName,
+                    role,
+                    email,
+                    password,
+                    confirmPassword,
+                });
+
+                // Handle response
+                if (response.data.error) {
+                    toast.error(response.data.error);
+                } else {
+                    setFormData({
+                        firstName: '',
+                        lastName: '',
+                        role: 'Student',
+                        email: '',
+                        password: '',
+                        confirmPassword: '',
+                    });
+                    toast.success('Sign Up Successful.');
+                    navigate('/SignIn');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                // Handle error
+            }
         } else {
             setErrors(errors);
-        }
-
-        
-        try {
-            // Make axios POST request
-            const response = await axios.post('/register', {
-                firstName,
-                lastName,
-                role,
-                email,
-                password,
-                confirmPassword
-            });
-    
-            // Handle response
-            if (response.data.error) {
-                toast.error(response.data.error);
-            } else {
-                setFormData({
-                    firstName: '',
-                    lastName: '',
-                    role: 'Student',
-                    email: '',
-                    password: '',
-                    confirmPassword: '',
-                });
-                toast.success('SignUp Successful.');
-                navigate('/signin');
-            }
-        } catch (error) {
-            console.error('Error:', error);
-            // Handle error
         }
     };
 
     return (
         <>
             <Nav />
-            <div className="mt-14 relative h-screen bg-cover bg-center flex items-start justify-center">
-                {/* Background Image */}
-                <img src="/signin.jpeg" alt="Background Image" className="absolute inset-0 w-full h-full object-cover" />
-
-                {/* Transparent Card */}
-                <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="bg-opacity-50 rounded-lg p-8 border w-96">
-                        <h1 className="text-2xl font-bold mb-4">Sign In</h1>
-
-                        <form onSubmit={handleSubmit}>
-                            <div className="mb-4">
-                                <input
-                                    type="text"
-                                    name="firstName"
-                                    placeholder="First Name"
-                                    value={formData.firstName}
-                                    onChange={handleChange}
-                                    className="border p-2 w-56 bg-gray-300 rounded-lg "
-                                />
-                                {errors.firstName && <p className="text-red-500">{errors.firstName}</p>}
-                            </div>
-
-                            <div className="mb-4">
-                                <input
-                                    type="text"
-                                    name="lastName"
-                                    placeholder="Last Name"
-                                    value={formData.lastName}
-                                    onChange={handleChange}
-                                    className="border p-2 w-56 bg-gray-300 rounded-lg"
-                                />
-                                {errors.lastName && <p className="text-red-500">{errors.lastName}</p>}
-                            </div>
-
-                            <div className="mb-4">
-                                <select
-                                    name="role"
-                                    value={formData.role}
-                                    onChange={handleChange}
-                                    className="border p-2 w-56 bg-gray-300 rounded-lg"
-                                >
-                                    <option value="Student">Student</option>
-                                    <option value="Teacher">Teacher</option>
-                                    <option value="Investor">Investor</option>
-                                </select>
-                            </div>
-
-                            <div className="mb-4">
-                                <input
-                                    type="email"
-                                    name="email"
-                                    placeholder="Email"
-                                    value={formData.email}
-                                    onChange={handleChange}
-                                    className="border p-2 w-56 bg-gray-300 rounded-lg"
-                                />
-                                {errors.email && <p className="text-red-500">{errors.email}</p>}
-                            </div>
-
-                            <div className="mb-4">
-                                <input
-                                    type="password"
-                                    name="password"
-                                    placeholder="Password"
-                                    value={formData.password}
-                                    onChange={handleChange}
-                                    className="border p-2 w-56 bg-gray-300 rounded-lg"
-                                />
-                                {errors.password && <p className="text-red-500">{errors.password}</p>}
-                            </div>
-
-                            <div className="mb-4">
-                                <input
-                                    type="password"
-                                    name="confirmPassword"
-                                    placeholder="Confirm Password"
-                                    value={formData.confirmPassword}
-                                    onChange={handleChange}
-                                    className="border p-2 w-56 bg-gray-300 rounded-lg"
-                                />
-                                {errors.confirmPassword && <p className="text-red-500">{errors.confirmPassword}</p>}
-                            </div>
-
-
-                            <button
-                            type='submit'
-                                className="mt-4 px-6 py-2 rounded-lg bg-gray-300 text-black hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-opacity-50"
-                            >
-                                Sign Up
-                            </button>
-
-
-
-
-                        </form>
+            <section>
+                <div className="mt-13 grid grid-cols-1 lg:grid-cols-2">
+                    <div className="flex flex-col justify-center items-center lg:flex-row lg:px-8 lg:py-24 bg-white mt-10">
+                        <div className="xl:mx-auto xl:w-full xl:max-w-sm 2xl:max-w-md bg-white px-5 py-5 shadow-xl">
+                            <h2 className="text-3xl font-bold leading-tight text-black sm:text-4xl">Sign up</h2>
+                            <p className="mt-2 text-base text-gray-600">
+                                Already have an account?{' '}
+                                <Link to="/SignIn" className="font-medium text-black transition-all duration-200 hover:underline">
+                                    Sign In
+                                </Link> {/* Use Link for navigation */}
+                            </p>
+                            <form onSubmit={handleSubmit} className="mt-8 space-y-5 w-full lg:w-auto">
+                                <div className="flex flex-col space-y-5 lg:flex-row lg:space-x-5 lg:space-y-0">
+                                    <div className="w-full lg:w-1/2">
+                                        <label htmlFor="firstName" className="text-base font-medium text-gray-900">
+                                            {' '}
+                                            First Name{' '}
+                                        </label>
+                                        <div className="mt-2">
+                                            <input
+                                                className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
+                                                type="text"
+                                                placeholder="First Name"
+                                                id="firstName"
+                                                name="firstName"
+                                                value={formData.firstName}
+                                                onChange={handleChange}
+                                            />
+                                            {errors.firstName && <p className="text-red-500">{errors.firstName}</p>}
+                                        </div>
+                                    </div>
+                                    <div className="w-full lg:w-1/2">
+                                        <label htmlFor="lastName" className="text-base font-medium text-gray-900">
+                                            {' '}
+                                            Last Name{' '}
+                                        </label>
+                                        <div className="mt-2">
+                                            <input
+                                                className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
+                                                type="text"
+                                                placeholder="Last Name"
+                                                id="lastName"
+                                                name="lastName"
+                                                value={formData.lastName}
+                                                onChange={handleChange}
+                                            />
+                                            {errors.lastName && <p className="text-red-500">{errors.lastName}</p>}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="flex flex-col space-y-5 lg:flex-row lg:space-x-5 lg:space-y-0">
+                                    <div className="w-full lg:w-1/2">
+                                        <label htmlFor="role" className="text-base font-medium text-gray-900">
+                                            {' '}
+                                            Role{' '}
+                                        </label>
+                                        <div className="mt-2">
+                                            <select
+                                                className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
+                                                name="role"
+                                                id="role"
+                                                value={formData.role}
+                                                onChange={handleChange}
+                                            >
+                                                <option value="Student">Student</option>
+                                                <option value="Teacher">Teacher</option>
+                                                <option value="Investor">Investor</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div className="w-full lg:w-1/2">
+                                        <label htmlFor="email" className="text-base font-medium text-gray-900">
+                                            {' '}
+                                            Email address{' '}
+                                        </label>
+                                        <div className="mt-2">
+                                            <input
+                                                className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
+                                                type="email"
+                                                placeholder="Email"
+                                                id="email"
+                                                name="email"
+                                                value={formData.email}
+                                                onChange={handleChange}
+                                            />
+                                            {errors.email && <p className="text-red-500">{errors.email}</p>}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="flex flex-col space-y-5 lg:flex-row lg:space-x-5 lg:space-y-0">
+                                    <div className="w-full lg:w-1/2">
+                                        <label htmlFor="password" className="text-base font-medium text-gray-900">
+                                            {' '}
+                                            Password{' '}
+                                        </label>
+                                        <div className="mt-2">
+                                            <input
+                                                className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
+                                                type="password"
+                                                placeholder="Password"
+                                                id="password"
+                                                name="password"
+                                                value={formData.password}
+                                                onChange={handleChange}
+                                            />
+                                            {errors.password && <p className="text-red-500">{errors.password}</p>}
+                                        </div>
+                                    </div>
+                                    <div className="w-full lg:w-1/2">
+                                        <label htmlFor="confirmPassword" className="text-base font-medium text-gray-900">
+                                            {' '}
+                                            Confirm Password{' '}
+                                        </label>
+                                        <div className="mt-2">
+                                            <input
+                                                className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
+                                                type="password"
+                                                placeholder="Confirm Password"
+                                                id="confirmPassword"
+                                                name="confirmPassword"
+                                                value={formData.confirmPassword}
+                                                onChange={handleChange}
+                                            />
+                                            {errors.confirmPassword && <p className="text-red-500">{errors.confirmPassword}</p>}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <button
+                                        type="submit"
+                                        className="inline-flex w-full items-center justify-center rounded-md bg-black px-3.5 py-2.5 font-semibold leading-7 text-white hover:bg-black/80"
+                                    >
+                                        Create Account <ArrowRight className="ml-2" size={16} />
+                                    </button>
+                                </div>
+                                </form>
+                        </div>
+                    </div>
+                    <div className="h-full w-full">
+                        <img
+                            className="mx-auto h-full w-full rounded-md object-cover"
+                            src="https://images.unsplash.com/photo-1559526324-4b87b5e36e44?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1742&q=80"
+                            alt=""
+                        />
                     </div>
                 </div>
-            </div>
+            </section>
         </>
     );
 };
 
-export default SignIn;
+export default SignUp;

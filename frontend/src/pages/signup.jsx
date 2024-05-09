@@ -43,7 +43,7 @@ const SignUp = () => {
         if (Object.keys(errors).length === 0) {
             try {
                 // Make axios POST request
-                const response = await axios.post('/register', {
+                const response = await axios.post('/signup', {
                     firstName,
                     lastName,
                     role,

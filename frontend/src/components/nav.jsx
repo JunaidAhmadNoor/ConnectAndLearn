@@ -22,7 +22,7 @@ const Nav = () => {
     }, []);
 
     return (
-        <nav className={` p-3 w-full fixed top-0 z-50 ${isScrolled ? 'w-10/12 mt-4 rounded-full bg-gray-300' : ''}`}>
+        <nav className={` p-3 w-full fixed bg-gray-200 top-0 z-50 ${isScrolled ? 'w-10/12 mt-4 rounded-full bg-gray-300' : ''}`}>
             <div className="container mx-auto flex justify-between items-center">
                 {/* Left side: Logo */}
                 <div className="flex items-center">
@@ -33,11 +33,11 @@ const Nav = () => {
 
                 {/* Right side: Signin and Signup */}
                 <div className="flex items-center">
-                    <Link to="/signin" className="pr-2 text-black mr-4">
-                        Signin
+                    <Link to="/SignIn" className="pr-3 pl-3 pb-2 pt-1 text-black mr-3  hover:bg-gray-400 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
+                        SignIn
                     </Link>
-                    <Link to="/signup" className="pr-10 text-black">
-                        Signup
+                    <Link to="/SignUp" className="pr-3 pl-3 pb-2 pt-1 text-black mr-3  hover:bg-gray-400 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
+                        SignUp
                     </Link>
                 </div>
             </div>

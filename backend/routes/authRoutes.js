@@ -15,8 +15,8 @@ router.use(
     }))
 
 router.get('/',test)
-router.post('/register', registerUser)
-router.post('/login', loginUser)
+router.post('/signup', registerUser)
+router.post('/SignIn', loginUser)
 router.get('/profile', getProfile)
 
 export default router;

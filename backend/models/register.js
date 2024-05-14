@@ -8,6 +8,7 @@ const registerSchema = new Schema({
     },
     lastName: {
         type: String,
+        unique: true,
         required: true
     },
     role: {

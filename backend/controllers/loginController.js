@@ -4,7 +4,9 @@ import jwt from 'jsonwebtoken'
 
 const { hashPassword, comparePassword } = authhelper;
 
-export default async function loginUser (req, res){
+
+
+const loginUser = async (req, res) => {
     try{
         const{email, password} = req.body;
 
@@ -18,7 +20,7 @@ export default async function loginUser (req, res){
         const match = await comparePassword(password, user.password)
         if(match){
             console.log('......')
-            jwt.sign({email: user.email, id: user._id, firstName: user.firstName}, process.env.JWT_SECRET, {}, (err, token) =>{
+            jwt.sign({email: user.email, id: user._id, firstName: user.firstName, lastName: user.lastName}, process.env.JWT_SECRET, {}, (err, token) =>{
                 if(err) throw err;
                 res.cookie('token', token).json(user);
             })
@@ -29,6 +31,9 @@ export default async function loginUser (req, res){
 
     }catch(error){
         console.log(error)
+        res.status(500).json({ error: 'Internal server error' });
     }
 }
+
+export default {loginUser}
 

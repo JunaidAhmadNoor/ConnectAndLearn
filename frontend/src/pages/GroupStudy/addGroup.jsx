@@ -13,7 +13,7 @@ const AddGroup = () => {
     const [topicName, setTopicName] = useState("");
     const [groupName, setGroupName] = useState("");
     const [membersAllowed, setMembersAllowed] = useState("");
-    const [minutes, setMinutes] = useState(""); // changed days to minutes
+    const [minutes, setMinutes] = useState(""); 
     const [creatorName, setCreatorName] = useState("");
 
     useEffect(() => {

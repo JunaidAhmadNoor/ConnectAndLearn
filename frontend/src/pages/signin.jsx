@@ -1,15 +1,44 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Nav from '../components/nav'; // Import the Nav component
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
 import { Link, useNavigate } from 'react-router-dom'; // Import Link and useNavigate
+import Cookies from 'js-cookie';
 
 const Home = () => {
+    const [userData,setUserData]=useState(null);
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
         email: '',
         password: '',
     });
+    useEffect(()=>{
+        if(userData?.role==="Student"){
+            console.log("This conditon was classified as true");
+            navigate("/groupStudy");
+        }
+        else if(userData?.role==="Teacher"){
+            navigate("/subjectService");
+        }
+    },[userData]);
+
+    useEffect(()=>{
+        const getUserData=async ()=>{
+            let token=Cookies.get("token")
+            if(token)
+            {
+                console.log(token);
+                try{
+                let response=await axios.post('/getUserData',{token});
+                setUserData(response.data);
+                }catch(error){
+                    console.log(error);
+                }
+            }
+
+        }
+        getUserData();
+    },[])
 
     const [errors, setErrors] = useState({});
 

@@ -35,7 +35,7 @@ const UpperBar = () => {
     <Header className="bg-white fixed top-0 w-full z-50 shadow-sm">
       <div className="container mx-auto py-2 flex justify-between items-center">
         <div className="logo">
-          <Avatar src={logo} size={32} style={{ marginRight: '20px' }} />
+          <Avatar src={logo} size={34} style={{ marginRight: '20px' }} />
         </div>
         <Dropdown overlay={menu}>
           <a className="ant-dropdown-link" onClick={e => e.preventDefault()} style={{ color: '#1890ff' }}>

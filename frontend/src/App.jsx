@@ -12,7 +12,7 @@ import Protected from './components/protected';
 import Details from './pages/GroupStudy/Details';
 import AddGroup from './pages/GroupStudy/addGroup';
 import Notifications from './pages/GroupStudy/Notifications';
-
+import PaidProjects from './pages/Paidprojects';
 axios.defaults.baseURL = 'http://localhost:4000';
 axios.defaults.withCredentials = true;
 
@@ -32,6 +32,10 @@ const App = () => {
                         <Route path="/Details/:spaceId" element={<Protected elementBody={<Details/>}/>} />
                         <Route path="/addGroup/:spaceId" element={<AddGroup />} />
                         <Route path="/Notifications" element={<Notifications/>} />
+                        <Route path="/paidprojects" element={<PaidProjects/>}/>
+
+                        
+                
                     </Routes>
                 
 

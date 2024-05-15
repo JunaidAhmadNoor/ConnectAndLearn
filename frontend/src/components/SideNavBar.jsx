@@ -12,7 +12,7 @@ const items = [
   { icon: <GroupOutlined />, label: label[0], link: '/groupStudy' },
   { icon: <SmileOutlined />, label: label[1], link: '/skillExchange' },
   { icon: <UsergroupAddOutlined />, label: label[2], link: '#' },
-  { icon: <ProjectOutlined />, label: label[3], link: '#' },
+  { icon: <ProjectOutlined />, label: label[3], link: '/paidprojects' },
   { icon: <RocketOutlined />, label: label[4], link: '#' },
 ];
 

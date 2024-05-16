@@ -13,6 +13,14 @@ import Details from './pages/GroupStudy/Details';
 import AddGroup from './pages/GroupStudy/addGroup';
 import Notifications from './pages/GroupStudy/Notifications';
 import PaidProjects from './pages/Paidprojects';
+import UserProfile from './pages/GroupStudy/profile';
+import SubjectService from './pages/Tutor/subjectService';
+import ListSubject from './pages/Tutor/listSubject';
+import TeacherProtected from './components/TeacherProtected';
+import HireTutor from './pages/hireTutor/hireTutor';
+
+
+
 axios.defaults.baseURL = 'http://localhost:4000';
 axios.defaults.withCredentials = true;
 
@@ -32,10 +40,18 @@ const App = () => {
                         <Route path="/Details/:spaceId" element={<Protected elementBody={<Details/>}/>} />
                         <Route path="/addGroup/:spaceId" element={<AddGroup />} />
                         <Route path="/Notifications" element={<Notifications/>} />
+
                         <Route path="/paidprojects" element={<PaidProjects/>}/>
 
                         
                 
+
+                        <Route path="/profile" element ={<Protected elementBody={<UserProfile />} />} />
+                        <Route path="/hireTutor" element={<Protected elementBody={<HireTutor />} />} />
+
+                        <Route path="/subjectService" element={<TeacherProtected elementBody={<SubjectService/>} />} />
+                        <Route path="/listSubject" element={<TeacherProtected elementBody={<ListSubject />} />}/>
+
                     </Routes>
                 
 

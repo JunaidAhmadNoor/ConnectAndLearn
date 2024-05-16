@@ -11,8 +11,13 @@ const label = ["Group Study", "Skill Exchange", "Hire A Tutor", "Paid Projects",
 const items = [
   { icon: <GroupOutlined />, label: label[0], link: '/groupStudy' },
   { icon: <SmileOutlined />, label: label[1], link: '/skillExchange' },
+
   { icon: <UsergroupAddOutlined />, label: label[2], link: '#' },
   { icon: <ProjectOutlined />, label: label[3], link: '/paidprojects' },
+
+  { icon: <UsergroupAddOutlined />, label: label[2], link: '/hireTutor' },
+  { icon: <ProjectOutlined />, label: label[3], link: '#' },
+
   { icon: <RocketOutlined />, label: label[4], link: '#' },
 ];
 

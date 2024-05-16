@@ -21,7 +21,7 @@ const TutorUpperBar = () => {
     <Menu>
       <Menu.Item key="profile">
         <Avatar icon={<UserOutlined />} size="small" style={{ color: 'green' }} className="mr-2" /> {/* Added margin */}
-        <a href="/profile">Profile</a>
+        <a href="/tutorProfile">Profile</a>
       </Menu.Item>
       <Menu.Item key="logout" onClick={handleLogout}>
         <Avatar icon={<LogoutOutlined />} size="small" style={{ color: 'red' }} className="mr-2" /> {/* Added margin */}

@@ -23,7 +23,6 @@ const AddGroupSchema = new Schema({
     },
     minutes: {
         type: Number,
-        enum: [5, 10, 20], 
         required: true,
     },
     connectedUsers: [{

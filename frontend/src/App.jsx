@@ -18,6 +18,7 @@ import SubjectService from './pages/Tutor/subjectService';
 import ListSubject from './pages/Tutor/listSubject';
 import TeacherProtected from './components/TeacherProtected';
 import HireTutor from './pages/hireTutor/hireTutor';
+import UserProfilePic from './pages/Tutor/tutorprofile';
 
 
 
@@ -41,6 +42,9 @@ const App = () => {
                         <Route path="/addGroup/:spaceId" element={<AddGroup />} />
                         <Route path="/Notifications" element={<Notifications/>} />
 
+                        <Route path="/profile" element ={<UserProfile />} />
+
+
                         <Route path="/paidprojects" element={<PaidProjects/>}/>
 
                         
@@ -51,6 +55,11 @@ const App = () => {
 
                         <Route path="/subjectService" element={<TeacherProtected elementBody={<SubjectService/>} />} />
                         <Route path="/listSubject" element={<TeacherProtected elementBody={<ListSubject />} />}/>
+
+                        <Route path="/tutorprofile" element={<TeacherProtected elementBody={<UserProfilePic />} />}/>
+                        
+
+
 
                     </Routes>
                 

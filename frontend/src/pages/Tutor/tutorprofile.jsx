@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import { Form, Input, Button, Typography, Upload, message } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 import axios from 'axios';
-import AppLayout from '../../components/AppLayout';
+import TutorAppLayout from '../../components/TutorAppLayout';
 import convertToBase64 from '../../utils/transformer';
 
 const { Title } = Typography;
 
-const UserProfile = () => {
+const UserProfilePic = () => {
     const [form] = Form.useForm();
     const [loading, setLoading] = useState(false);
     const [fileList, setFileList] = useState([]);
@@ -42,7 +42,7 @@ const UserProfile = () => {
     };
 
     return (
-        <AppLayout>
+        <TutorAppLayout>
             <Form form={form} onFinish={onFinish} layout="vertical" className='w-56 mt-20 ml-60'>
                 <Title level={2}>Profile Form</Title>
                 <Form.Item label="Username" name="username" rules={[{ required: true, message: 'Please input your username!' }]}>
@@ -69,8 +69,8 @@ const UserProfile = () => {
                     <Button type="primary" htmlType="submit" loading={loading}>Submit</Button>
                 </Form.Item>
             </Form>
-        </AppLayout>
+        </TutorAppLayout>
     );
 };
 
-export default UserProfile;
+export default UserProfilePic;
